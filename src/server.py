@@ -36,20 +36,23 @@ class Server:
             params = request.args
 
             if not "url" in params:
-                return send_json(json.dumps({ "error": "No url provided" }))
+                return send_json(json.dumps({"error": "No url provided"}))
 
             if not "label" in params:
-                return send_json(json.dumps({ "error": "No label provided" }))
+                return send_json(json.dumps({"error": "No label provided"}))
 
             url = urllib.parse.unquote(params["url"])
             label = urllib.parse.unquote(params["label"])
+
+            if not label in AI.label_alias:
+                return send_json(json.dumps({"error": "Not implemented label"}))
 
             st = time.time()
             img_bytes = requests.get(url).content
             res = ai.predict(img_bytes, label)
             et = time.time() - st
 
-            return send_json(json.dumps({ "result": res, "time": str(et)}))
+            return send_json(json.dumps({"result": res, "time": str(et)}))
 
     def start(self):
         self.api.run(host=self.host, port=self.port, debug=False)

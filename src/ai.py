@@ -2,6 +2,7 @@
 
 from solutions import sk_recognition, resnet, yolo
 
+
 class AI:
     label_alias = {
         "airplane": "airplane",
@@ -18,14 +19,15 @@ class AI:
         "car": "car",
         "elephant": "elephant",
         "parrot": "bird",
+        "bird": "bird",
     }
 
     def __init__(
-        self,
-        dir_model: str = None,
-        onnx_prefix: str = None,
-        path_objects_yaml: str = None,
-        path_rainbow_yaml: str = None,
+            self,
+            dir_model: str = None,
+            onnx_prefix: str = None,
+            path_objects_yaml: str = None,
+            path_rainbow_yaml: str = None,
     ):
 
         self.dir_model = dir_model
